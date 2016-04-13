@@ -167,7 +167,7 @@ var argv = yargs
       }
     }
 
-    if (argv.encryptionPublicKey) {;
+    if (argv.encryptionPublicKey) {
       if (!fs.existsSync(argv.encryptionPublicKey)) {
         return 'Encryption public key "' + argv.encryptionPublicKey + '" is not a valid file path';
       }
@@ -208,8 +208,10 @@ SimpleProfileMapper.prototype.metadata = config.metadata;
 
 var idpOptions = {
   issuer:                 argv.issuer,
-  cert:                   fs.readFileSync(path.join(__dirname, 'idp-public-cert.pem')),
-  key:                    fs.readFileSync(path.join(__dirname, 'idp-private-key.pem')),
+  // cert:                   fs.readFileSync(path.join(__dirname, 'idp-public-cert.pem')),
+  // key:                    fs.readFileSync(path.join(__dirname, 'idp-private-key.pem')),
+  cert:                   argv.cert.toString(),
+  key:                    argv.cert.toString(),
   audience:               argv.audience,
   recipient:              argv.acsUrl,
   destination:            argv.acsUrl,
